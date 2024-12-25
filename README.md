@@ -74,3 +74,45 @@ This project is a Django-based Content Management System (CMS) API that provides
    ```bash
    git clone <repo_url>
    cd cms_project
+
+2. **Create a Virtual Environment**:
+   ```bash
+   python -m venv env
+   source env/bin/activate  # For Linux/Mac
+   env\Scripts\activate     # For Windows
+   ```
+
+3. **Install Dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Apply Database Migrations**:
+   ```bash
+   python manage.py makemigrations
+   python manage.py migrate
+   ```
+
+5. **Run the Development Server**:
+   ```bash
+   python manage.py runserver
+   ```
+
+6. **Access the API**:
+   Visit `http://127.0.0.1:8000` to start interacting with the API.
+
+---
+
+## Testing
+1. **Run Unit Tests**:
+   ```bash
+   python manage.py test
+   ```
+
+2. **Use Postman**:
+   A Postman collection is included in the repository for testing API endpoints.
+
+---
+
+## Notes
+- Ensure sensitive information is stored in environment variables for production environments.
