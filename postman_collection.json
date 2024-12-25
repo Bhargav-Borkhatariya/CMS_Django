@@ -1,0 +1,589 @@
+{
+	"info": {
+		"_postman_id": "4f5fd9d6-4bfa-4865-a293-c9b75f02c7c1",
+		"name": "CMS API Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29225419",
+		"_collection_link": "https://www.postman.com/avionics-astronaut-22974687/bhargav-borkhatariya/collection/m0fb8ec/cms-api-collection?action=share&source=collection_link&creator=29225419"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Create account",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse the response JSON",
+									"let responseData = pm.response.json();",
+									"",
+									"// Extract the tokens from the response",
+									"let refreshToken = responseData.data.refresh;",
+									"let accessToken = responseData.data.access;",
+									"",
+									"// Set the tokens as collection variables",
+									"pm.collectionVariables.set(\"refresh_token\", refreshToken);",
+									"pm.collectionVariables.set(\"access_token\", accessToken);",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"testuser5\",\n    \"email\": \"testuser5@example.com\",\n    \"password\": \"securepassword\",\n    \"first_name\": \"Test\",\n    \"last_name\": \"User5\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{domain}}/accounts/",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"accounts",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse the response JSON",
+									"let responseData = pm.response.json();",
+									"",
+									"// Extract the tokens from the response",
+									"let refreshToken = responseData.data.refresh;",
+									"let accessToken = responseData.data.access;",
+									"",
+									"// Set the tokens as collection variables",
+									"pm.collectionVariables.set(\"refresh_token\", refreshToken);",
+									"pm.collectionVariables.set(\"access_token\", accessToken);",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"login\": \"testuser3\",\n    \"password\": \"securepassword\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{domain}}/accounts/login/",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"accounts",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user info",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/accounts/me/",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"accounts",
+								"me",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user info",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"updateduser\",\n    \"email\": \"updateduser@example.com\",\n    \"first_name\": \"Updated\",\n    \"last_name\": \"User\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{domain}}/accounts/3/",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"accounts",
+								"3",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user info Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "http://{{domain}}/accounts/3/",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"accounts",
+								"3",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"refresh\": \"{{refresh_token}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{domain}}/accounts/token/refresh",
+							"protocol": "http",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"accounts",
+								"token",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Blog",
+			"item": [
+				{
+					"name": "Post",
+					"item": [
+						{
+							"name": "Get all blog post",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://{{domain}}/blog/",
+									"protocol": "http",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"blog",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create blog post",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "My New Post with Image",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "Short description",
+											"type": "text"
+										},
+										{
+											"key": "content",
+											"value": "Post content with image.",
+											"type": "text"
+										},
+										{
+											"key": "is_public",
+											"value": "true",
+											"type": "text"
+										},
+										{
+											"key": "category",
+											"value": "Technology",
+											"type": "text"
+										},
+										{
+											"key": "tags",
+											"value": "django,api",
+											"type": "text"
+										},
+										{
+											"key": "cover_image",
+											"contentType": "image/jpeg",
+											"type": "file",
+											"src": "/home/ajax/Downloads/django-logo.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://{{domain}}/blog/",
+									"protocol": "http",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"blog",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve a  blog post",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://{{domain}}/blog/3/",
+									"protocol": "http",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"blog",
+										"3",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update a blog post",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Updated Post Title",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "Updated description",
+											"type": "text"
+										},
+										{
+											"key": "content",
+											"value": "Updated content",
+											"type": "text"
+										},
+										{
+											"key": "is_public",
+											"value": "true",
+											"type": "text"
+										},
+										{
+											"key": "category",
+											"value": "Updated Category",
+											"type": "text"
+										},
+										{
+											"key": "tags",
+											"value": "updated,tags",
+											"type": "text"
+										},
+										{
+											"key": "cover_image",
+											"contentType": "image/jpeg",
+											"type": "file",
+											"src": "/home/ajax/Downloads/Bhargav-Borkhatariya-Profile-Pic.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://{{domain}}/blog/3/",
+									"protocol": "http",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"blog",
+										"3",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete a blog post",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}"
+									}
+								],
+								"url": {
+									"raw": "http://l{{domain}}/blog/2/",
+									"protocol": "http",
+									"host": [
+										"l{{domain}}"
+									],
+									"path": [
+										"blog",
+										"2",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Like",
+					"item": [
+						{
+							"name": "Like a post",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}"
+									}
+								],
+								"url": {
+									"raw": "http://{{domain}}/blog/2/like/",
+									"protocol": "http",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"blog",
+										"2",
+										"like",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Unlike a blog",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}"
+									}
+								],
+								"url": {
+									"raw": "http://{{domain}}/blog/2/unlike/",
+									"protocol": "http",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"blog",
+										"2",
+										"unlike",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "refresh_token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "access_token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

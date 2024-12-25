@@ -112,6 +112,21 @@ This project is a Django-based Content Management System (CMS) API that provides
 2. **Use Postman**:
    A Postman collection is included in the repository for testing API endpoints.
 
+# Postman Collection and Environment for Blog API
+
+This directory contains the Postman collection and environment for the Blog API.
+
+## How to Import:
+
+1.  Open Postman.
+2.  Click on **Import** (usually located at the top-left).
+3.  Choose **File** and select the `postman_collection.json` file.
+4.  Click **Import**.
+5.  Go to **Environments** in Postman.
+6.  Click on **Import**.
+7.  Choose **File** and select the `postman_environment.json` file.
+8.  Click **Import**.
+
 ---
 
 ## Notes
